@@ -1,2 +1,2 @@
-# SKOLICA_Python
+# ŠKOLICA Python
  
