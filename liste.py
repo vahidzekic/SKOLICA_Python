@@ -7,6 +7,7 @@ print(len(mojaLista))
 print(type(mojaLista))
 print(mojaLista)
 
+listaNova = [1, 2, 3, 4]
 
 
 mojaLista1 = ["Vahid", "Kemo", "Omer"]
