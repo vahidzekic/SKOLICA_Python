@@ -26,7 +26,7 @@ a, b , c = 4, "ime", 7
 print(a,b,c)
 
 
-ispisivanje liste
+# ispisivanje liste
 lista = [1, 2, 3, 4, 5, 6 ]
 print(lista)
 
