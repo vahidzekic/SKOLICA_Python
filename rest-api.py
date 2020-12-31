@@ -1,7 +1,11 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request, abort
+from flask_cors import CORS
 
 mojaAplikacija = Flask(__name__)
+CORS(mojaAplikacija)
 
+bazaPodataka = ConnectionAbortedError
+ 
 studenti = [
     { 
         "id": 1,
@@ -31,10 +35,36 @@ studenti = [
     
 ]
 
-# GET metoda
+
+# GET metoda - Status servera
+@mojaAplikacija.route('/')
+def statusServer():
+    return "Server je ONLINE!!!"
+
+
+# GET metoda - JSON objekat
 @mojaAplikacija.route('/get')
 def mojaGetMetoda():
     return jsonify(studenti)
+
+
+# POST metoda - JSON objekat
+@mojaAplikacija.route('/post', methods=['POST'])
+def mojPostMetoda():
+    if not request.json or not 'ime' in request.json:
+        abort(400)
+    student = {
+        'id': request.json['id'],
+        'ime': request.json['ime'],
+        'prezime': request.json['prezime'],
+        'godine': request.json['godine'],
+        'pol': request.json['pol']
+    }
+    studenti.append(student)
+    return "POST metoda je uspeshno izvrshena."
+
+
+
 
 if __name__ == '__main__':
     mojaAplikacija.run(debug=True)
