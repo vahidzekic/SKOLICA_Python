@@ -1,45 +1,23 @@
 from flask import Flask, jsonify, request, abort
 from flask_cors import CORS
+import json
+import platform
 
 mojaAplikacija = Flask(__name__)
 CORS(mojaAplikacija)
 
-bazaPodataka = ConnectionAbortedError
- 
-studenti = [
-    { 
-        "id": 1,
-        "ime": "Vahid",
-        "prezime": "Zekic",
-        "godine": 34,
-        "pol": "muski"
-    },{ 
-        "id": 2,
-        "ime": "Enes",
-        "prezime": "Daca",
-        "godine": 32,
-        "pol": "muski"
-    },{ 
-        "id": 3,
-        "ime": "Omer",
-        "prezime": "Ljajic",
-        "godine": 16,
-        "pol": "muski"
-    },{ 
-        "id": 4,
-        "ime": "Kemo",
-        "prezime": "Plojovic",
-        "godine": 27,
-        "pol": "muski"
-    }
-    
-]
+studenti = []
+with open('rest-api.json') as JsonPodatak:
+    studenti = json.load(JsonPodatak)
 
 
 # GET metoda - Status servera
 @mojaAplikacija.route('/')
 def statusServer():
-    return "Server je ONLINE!!!"
+    poruka = 'Server je ONLINE '
+    status = platform.version()
+    ip = platform.node()
+    return poruka + status + " IP Adresa je: " + ip
 
 
 # GET metoda - JSON objekat
@@ -50,7 +28,7 @@ def mojaGetMetoda():
 
 # POST metoda - JSON objekat
 @mojaAplikacija.route('/post', methods=['POST'])
-def mojPostMetoda():
+def mojaPostMetoda():
     if not request.json or not 'ime' in request.json:
         abort(400)
     student = {
@@ -61,12 +39,34 @@ def mojPostMetoda():
         'pol': request.json['pol']
     }
     studenti.append(student)
+    with open ('rest-api.json', 'w') as sacuvajJson:
+        json.dump(studenti, sacuvajJson)
     return "POST metoda je uspeshno izvrshena."
 
+# DELETE metoda preko IDa - JSON objekat
+@mojaAplikacija.route('/brisanje/<int:student_id>', methods=['DELETE'])
+def mojaDeleteMetoda(student_id):
+    student = [student for student in studenti if student['id'] == student_id]
+    if len(student) == 0:
+        abort(404)
+    studenti.remove(student[0])
+    with open ('rest-api.json', 'w') as sacuvajJson:
+        json.dump(studenti, sacuvajJson)
+    return "Student je obrisan."
+
+
+# DELETE metoda preko IMENA - JSON objekat
+@mojaAplikacija.route('/brisanje/<student_ime>', methods=['DELETE'])
+def mojaDeleteMetoda2(student_ime):
+    student = [student for student in studenti if student['ime'] == student_ime]
+    if len(student) == 0:
+        abort(404)
+    studenti.remove(student[0])
+    with open ('rest-api.json', 'w') as sacuvajJson:
+        json.dump(studenti, sacuvajJson)
+    return "Student je obrisan."
 
 
 
 if __name__ == '__main__':
-    mojaAplikacija.run(debug=True)
-
-
+    mojaAplikacija.run(host='0.0.0.0', port=5000, debug=True)
