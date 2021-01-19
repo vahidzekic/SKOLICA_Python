@@ -43,6 +43,36 @@ def mojaPostMetoda():
         json.dump(studenti, sacuvajJson)
     return "POST metoda je uspeshno izvrshena."
 
+#region PUT Metoda - JSON objekat
+@mojaAplikacija.route('/put/<int:student_id>', methods=['PUT'])
+def mojaPutMetoda(student_id):
+    student = [student for student in studenti if student['id'] == student_id]
+
+    # ZA DOMACI popraviti validaciju JSON objekta
+    # if student_id == 1:
+    #     abort(404)
+    # if not request.json:
+    #     abort(400)
+    # if 'id' in request.json:
+    #     abort(400)
+    # if 'ime' in request.json:
+    #     abort(400)
+    # if 'prezime' in request.json:
+    #     abort(400)
+    # if 'godine' in request.json:
+    #     abort(400)
+    # if 'pol' in request.json:
+    #     abort(400)
+
+    studenti[student_id]['id'] = request.json.get('id', studenti[student_id]['id'])
+    studenti[student_id]['ime'] = request.json.get('ime', studenti[student_id]['ime'])
+    studenti[student_id]['prezime'] = request.json.get('prezime', studenti[student_id]['prezime'])
+    studenti[student_id]['godine'] = request.json.get('godine', studenti[student_id]['prezime'])
+    studenti[student_id]['pol'] = request.json.get('pol', studenti[student_id]['pol'])
+
+    return jsonify(studenti)
+#endregion
+
 # DELETE metoda preko IDa - JSON objekat
 @mojaAplikacija.route('/brisanje/<int:student_id>', methods=['DELETE'])
 def mojaDeleteMetoda(student_id):

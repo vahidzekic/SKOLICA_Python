@@ -45,7 +45,51 @@ print("Boja: " + str(auto["boja"]))
 print("Godina: " + str(auto["godina"]))
 print("Sedista: " + str(auto["sedista"]))
 
+lista = [1,2,3,4,5]
+
+
+JsonObjekat = [
+    {
+        "godine": 34,
+        "id": 1,
+        "ime": "Vahid",
+        "pol": "muski",
+        "prezime": "Zekic"
+    },
+        {
+        "godine": 34,
+        "id": 2,
+        "ime": "Omer",
+        "pol": "muski",
+        "prezime": "Ljajic"
+    },
+        {
+        "godine": 34,
+        "id": 3,
+        "ime": "Kemo",
+        "pol": "muski",
+        "prezime": "Plojovic"
+    }
+]
+
+JsonRecnik = {
+        "godine": 34,
+        "id": 4,
+        "ime": "Muhamed",
+        "pol": "muski",
+        "prezime": "Zukovic"
+    }
+
+JsonRecnik.update({'ime': 'Vahid'})
+
+JsonObjekat.append(JsonRecnik)
+
+JsonObjekat[2]['ime'] = 'Vahid'
+
+
+# print(JsonObjekat[2]['prezime'])
 
 
 
+print(JsonObjekat)
 
