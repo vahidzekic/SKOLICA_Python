@@ -23,12 +23,12 @@ lista.insert(1, 'Vahid')
 # menja element lista na odredjenoj poziciji
 lista[4] = 'Avion'
 
-# print(lista)
+print(lista)
 
 
 lista1 = []
 lista1 = list()
-lista1 = ['prvi', 2, 'treci', True, 8, 45, 'jedan', 9]
+
 
 # tuple1 = ()
 tuple1 = tuple()
@@ -71,17 +71,4 @@ JSON = [
 }
 ]
 
-
-poruka = JSON[0]['ime'] + ' ' + JSON[0]['prezime'] 
-
-
-print('Ime i prezime: ' + poruka)
-
-lista1 = ["prvi", "drugi", "treci", "cetvrti", "peti", "shesti", "sedmi"]
-print(lista1)
-print(lista1[2:])
-print(lista1[:5])
-print(lista1[2:5])
-
-
-print(type(lista1))
+print(JSON[2]['prezime'])
