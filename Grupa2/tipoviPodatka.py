@@ -72,7 +72,11 @@ JSON = [
 ]
 
 
-poruka = JSON[0]['ime'] + ' ' + JSON[0]['prezime'] 
+
+
+
+
+poruka = JSON[2]['ime'] + ' ' + JSON[2]['prezime'] 
 
 
 print('Ime i prezime: ' + poruka)
