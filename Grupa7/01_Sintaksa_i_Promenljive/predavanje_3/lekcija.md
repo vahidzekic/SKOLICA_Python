@@ -1,0 +1,10 @@
+# Predavanje 3 — Operatori i input()
+
+## 3.1 Aritmetički: `+ - * / // % **`
+## 3.2 Poređenje: `== != < > <= >=`
+## 3.3 Dodela: `+= -= *= /=`
+## 3.4 input() — uvek str!
+## 3.5 Prioritet: PEMDAS
+
+## Rezime
+- Konvertovati input() pre matematike
