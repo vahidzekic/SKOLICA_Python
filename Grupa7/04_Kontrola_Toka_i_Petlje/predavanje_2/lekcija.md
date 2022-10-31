@@ -1,0 +1,7 @@
+# Predavanje 2 â FOR
+
+## for x in seq, range()
+## enumerate(), zip()
+
+## Rezime
+- range(start, stop, step)
